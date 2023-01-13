@@ -60,7 +60,7 @@ class IMGMNG_PT_available_images_sub(bpy.types.Panel):
             row.operator('imgmng.create_image_folder', text="", icon="NEWFOLDER")
         else:
             row.label(text="", icon="FILE_REFRESH")
-            row.label(text="", icon="FILE_FOLDER")
+            row.operator('imgmng.open_filepath', text="", icon="FILE_FOLDER").filepath=folderpath
 
             if props.active_available_image_index in range(0,len(bpy.data.images)):
                 col=layout.column(align=True)
