@@ -59,22 +59,22 @@ class IMGMNG_PT_available_images_sub(bpy.types.Panel):
         if not os.path.isdir(folderpath):
             row.operator('imgmng.create_image_folder', text="", icon="NEWFOLDER")
         else:
-            row.label(text="", icon="FILE_REFRESH")
+            row.operator('imgmng.reload_available_images', text="", icon="FILE_REFRESH")
             row.operator('imgmng.open_filepath', text="", icon="FILE_FOLDER").filepath=folderpath
 
-            if props.active_available_image_index in range(0,len(bpy.data.images)):
+            if props.active_available_image_index in range(0,len(props.available_images)):
                 col=layout.column(align=True)
                 col.template_list(
                     "IMGMNG_UL_internal_images_uilist",
                     "",
-                    bpy.data,
-                    "images",
+                    props,
+                    "available_images",
                     props,
                     "active_available_image_index",
                     rows=3
                     )
                 # selected image path
-                active = bpy.data.images[props.active_available_image_index]
+                active = props.available_images[props.active_available_image_index]
                 col.prop(active, "filepath", text="")
 
 

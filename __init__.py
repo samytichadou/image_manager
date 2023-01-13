@@ -41,6 +41,7 @@ from . import (
 
 from .operators import (
     folder_actions,
+    reload_available_images,
 )
 
 # register
@@ -53,6 +54,7 @@ def register():
     properties.register()
 
     folder_actions.register()
+    reload_available_images.register()
 
 def unregister():
     addon_prefs.unregister()
@@ -61,3 +63,4 @@ def unregister():
     properties.unregister()
 
     folder_actions.unregister()
+    reload_available_images.unregister()
