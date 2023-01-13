@@ -12,6 +12,15 @@ class IMGMNG_PT_image_panel(bpy.types.Panel):
             return True
 
     def draw(self, context):
+        layout = self.layout
+
+class IMGMNG_PT_internal_images_sub(bpy.types.Panel):
+    bl_label = "Internal Images"
+    bl_parent_id = "IMGMNG_PT_image_panel"
+    bl_space_type = 'PROPERTIES'
+    bl_region_type = 'WINDOW'
+
+    def draw(self, context):
         props = context.scene.imgmng_properties
         layout = self.layout
 
@@ -35,6 +44,8 @@ class IMGMNG_PT_image_panel(bpy.types.Panel):
 
 def register():
     bpy.utils.register_class(IMGMNG_PT_image_panel)
+    bpy.utils.register_class(IMGMNG_PT_internal_images_sub)
 
 def unregister():
     bpy.utils.unregister_class(IMGMNG_PT_image_panel)
+    bpy.utils.unregister_class(IMGMNG_PT_internal_images_sub)
