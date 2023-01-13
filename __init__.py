@@ -39,6 +39,10 @@ from . import (
     properties,
 )
 
+from .operators import (
+    folder_actions,
+)
+
 # register
 ##################################
 
@@ -48,8 +52,12 @@ def register():
     gui.register()
     properties.register()
 
+    folder_actions.register()
+
 def unregister():
     addon_prefs.unregister()
     ui_lists.unregister()
     gui.unregister()
     properties.unregister()
+
+    folder_actions.unregister()

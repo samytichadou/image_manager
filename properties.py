@@ -1,8 +1,11 @@
 import bpy
 
 class IMGMNG_PR_properties(bpy.types.PropertyGroup) :
-    active_image_index : bpy.props.IntProperty(
-        name='Image Index',
+    active_local_image_index : bpy.props.IntProperty(
+        name='Local Image Index',
+        )
+    active_available_image_index : bpy.props.IntProperty(
+        name='Available Image Index',
         )
 
 
