@@ -65,7 +65,7 @@ class IMGMNG_PT_available_images_sub(bpy.types.Panel):
             if props.active_available_image_index in range(0,len(props.available_images)):
                 col=layout.column(align=True)
                 col.template_list(
-                    "IMGMNG_UL_internal_images_uilist",
+                    "IMGMNG_UL_external_images_uilist",
                     "",
                     props,
                     "available_images",
