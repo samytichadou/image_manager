@@ -50,8 +50,8 @@ class IMGMNG_OT_create_image_folder(bpy.types.Operator):
 
 class IMGMNG_OT_open_filepath(bpy.types.Operator):
     bl_idname = "imgmng.open_filepath"
-    bl_label = "Create Folder"
-    bl_description = "Create external image folder."
+    bl_label = "Open Folder"
+    bl_description = "Open external image folder."
     bl_options = {'INTERNAL'}
 
     filepath: bpy.props.StringProperty()
