@@ -63,8 +63,7 @@ class IMGMNG_PT_available_images_sub(bpy.types.Panel):
             row.operator('imgmng.open_filepath', text="", icon="FILE_FOLDER").filepath=folderpath
 
             if props.active_available_image_index in range(0,len(props.available_images)):
-                col=layout.column(align=True)
-                col.template_list(
+                layout.template_list(
                     "IMGMNG_UL_external_images_uilist",
                     "",
                     props,
@@ -73,9 +72,6 @@ class IMGMNG_PT_available_images_sub(bpy.types.Panel):
                     "active_available_image_index",
                     rows=3
                     )
-                # selected image path
-                active = props.available_images[props.active_available_image_index]
-                col.prop(active, "filepath", text="")
 
 
 ### REGISTER ---
