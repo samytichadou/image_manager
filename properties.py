@@ -18,6 +18,17 @@ class IMGMNG_PR_properties(bpy.types.PropertyGroup) :
         name='Available Image Index',
         )
 
+class IMGMNG_PR_image_parents(bpy.types.PropertyGroup) :
+    type_items = [
+        ('MATERIAL', 'Material', ""),
+        ('WORLD', 'World', ""),
+        ('NODEGROUP', 'NodeGroup', ""),
+    ]
+    type : bpy.props.EnumProperty(name = "Type", items = type_items, default = 'MATERIAL')
+    filepath : bpy.props.StringProperty(
+        name='Available Image Filepath',
+        )    
+
 
 ### REGISTER ---
 
