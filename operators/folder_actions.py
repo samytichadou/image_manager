@@ -37,7 +37,7 @@ class IMGMNG_OT_create_image_folder(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return True
+        return bpy.data.is_saved
 
     def execute(self, context):
         folderpath=return_image_folder()
