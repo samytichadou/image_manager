@@ -1,4 +1,7 @@
 import bpy
+import os
+
+from .operators import folder_actions_operator as fld
 
 def return_image_users(image):
     if image.use_fake_user:
@@ -33,6 +36,13 @@ class IMGMNG_UL_internal_images_uilist(bpy.types.UIList):
             row.operator('imgmng.unpack_image', text="", icon="PACKAGE").image=item.name
         else:
             row.operator('imgmng.pack_image', text="", icon="UGLYPACKAGE").image=item.name
+
+        # RESOURCES FOLDER
+        folderpath=fld.return_image_folder()
+        if os.path.dirname(bpy.path.abspath(item.filepath))==folderpath:
+            row.label(text="", icon="CHECKMARK")
+        else:
+            row.operator('imgmng.copy_image', text="", icon="FOLDER_REDIRECT").image=item.name
 
 
 # External Images

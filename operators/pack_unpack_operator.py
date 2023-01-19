@@ -2,7 +2,7 @@ import bpy
 import shutil
 import os
 
-from . import folder_actions_operator as pck
+from . import folder_actions_operator as fld
 from . import reload_available_images_operator as rld
 
 def pack_image(image):
@@ -24,7 +24,7 @@ def unpack_image_at_location(image, location):
     image.filepath=dst
     return dst
 
-class IMGMNG_OT_pack_operator(bpy.types.Operator):
+class IMGMNG_OT_pack_image(bpy.types.Operator):
     bl_idname = "imgmng.pack_image"
     bl_label = "Pack Image"
     bl_description = "Pack image."
@@ -41,7 +41,7 @@ class IMGMNG_OT_pack_operator(bpy.types.Operator):
         self.report({'INFO'}, f"Image Packed : {self.image}")
         return {'FINISHED'}
 
-class IMGMNG_OT_unpack_operator(bpy.types.Operator):
+class IMGMNG_OT_unpack_image(bpy.types.Operator):
     bl_idname = "imgmng.unpack_image"
     bl_label = "Unpack Image"
     bl_description = "Unpack image in resources folder."
@@ -54,7 +54,7 @@ class IMGMNG_OT_unpack_operator(bpy.types.Operator):
         return True
 
     def execute(self, context):
-        filepath=unpack_image_at_location(bpy.data.images[self.image], pck.return_image_folder())
+        filepath=unpack_image_at_location(bpy.data.images[self.image], fld.return_image_folder())
         self.report({'INFO'}, f"Image Unpacked : {filepath}")
         rld.reload_available_images()
         return {'FINISHED'}
@@ -63,9 +63,9 @@ class IMGMNG_OT_unpack_operator(bpy.types.Operator):
 ### REGISTER ---
 
 def register():
-    bpy.utils.register_class(IMGMNG_OT_pack_operator)
-    bpy.utils.register_class(IMGMNG_OT_unpack_operator)
+    bpy.utils.register_class(IMGMNG_OT_pack_image)
+    bpy.utils.register_class(IMGMNG_OT_unpack_image)
 
 def unregister():
-    bpy.utils.unregister_class(IMGMNG_OT_pack_operator)
-    bpy.utils.unregister_class(IMGMNG_OT_unpack_operator)
+    bpy.utils.unregister_class(IMGMNG_OT_pack_image)
+    bpy.utils.unregister_class(IMGMNG_OT_unpack_image)
