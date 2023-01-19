@@ -1,7 +1,7 @@
 import bpy
 import os
 
-from .operators.folder_actions import return_image_folder
+from .operators.folder_actions_operator import return_image_folder
 
 from bpy.types import bpy_prop_collection   
 def search_image_uses(ID):
@@ -131,4 +131,4 @@ def unregister():
     bpy.utils.unregister_class(IMGMNG_PT_image_panel)
     bpy.utils.unregister_class(IMGMNG_PT_local_images_sub)
     bpy.utils.unregister_class(IMGMNG_PT_image_uses_sub)
-    bpy.utils.unregister_class(IMGMNG_PT_available_images_sub)    
+    bpy.utils.unregister_class(IMGMNG_PT_available_images_sub)

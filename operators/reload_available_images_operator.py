@@ -1,7 +1,7 @@
 import bpy
 import os
 
-from .folder_actions import return_image_folder
+from .folder_actions_operator import return_image_folder
 
 img_extensions={
     ".bmp",

@@ -40,8 +40,9 @@ from . import (
 )
 
 from .operators import (
-    folder_actions,
-    reload_available_images,
+    folder_actions_operator,
+    reload_available_images_operator,
+    pack_unpack_operator,
 )
 
 # register
@@ -53,8 +54,9 @@ def register():
     gui.register()
     properties.register()
 
-    folder_actions.register()
-    reload_available_images.register()
+    folder_actions_operator.register()
+    reload_available_images_operator.register()
+    pack_unpack_operator.register()
 
 def unregister():
     addon_prefs.unregister()
@@ -62,5 +64,6 @@ def unregister():
     gui.unregister()
     properties.unregister()
 
-    folder_actions.unregister()
-    reload_available_images.unregister()
+    folder_actions_operator.unregister()
+    reload_available_images_operator.unregister()
+    pack_unpack_operator.unregister()
