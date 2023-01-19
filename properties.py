@@ -4,6 +4,7 @@ class IMGMNG_PR_available_images(bpy.types.PropertyGroup) :
     filepath : bpy.props.StringProperty(
         name='Available Image Filepath',
         )
+    imported : bpy.props.BoolProperty()
 
 class IMGMNG_PR_properties(bpy.types.PropertyGroup) :
     available_images: bpy.props.CollectionProperty(

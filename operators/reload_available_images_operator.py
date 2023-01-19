@@ -37,6 +37,11 @@ def reload_available_images():
             new.name=f
             new.filepath=os.path.join(folderpath, f)
 
+            for img in bpy.data.images:
+                if bpy.path.abspath(img.filepath)==new.filepath:
+                    new.imported=True
+                    break
+
 
 class IMGMNG_OT_reload_available_images(bpy.types.Operator):
     bl_idname = "imgmng.reload_available_images"

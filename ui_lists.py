@@ -22,12 +22,12 @@ class IMGMNG_UL_internal_images_uilist(bpy.types.UIList):
         if item.source in {'VIEWER','GENERATED'} \
         or not item.filepath:
             row.label(text="", icon="DOT")
-            row.label(text="", icon="BLENDER")
+            row.label(text="", icon="GHOST_ENABLED")
             row.label(text=item.name)
 
         # external files
         else:
-            # RESOURCES FOLDER
+            # RESOURCESe FOLDER
             folderpath=fld.return_image_folder()
             if os.path.dirname(bpy.path.abspath(item.filepath))==folderpath:
                 row.label(text="", icon="CHECKMARK")
@@ -48,12 +48,67 @@ class IMGMNG_UL_internal_images_uilist(bpy.types.UIList):
             else:
                 row.operator('imgmng.pack_image', text="", icon="UGLYPACKAGE").image=item.name
 
+    # def filter_items(self, context, data, propname):
+    #     filtered = []
+    #     ordered = []
+    #
+    #     items = getattr(data, propname)
+    #
+    #     # # Initialize with all items visible
+    #     # flt_flags = [self.bitflag_filter_item] * len(items)
+    #
+    #     # Filter
+    #     # if self.filter_by_random_prop:
+    #
+    #     # Name filtering
+    #     if self.filter_name:
+    #         helpers = bpy.types.UI_UL_list
+    #         filtered = helpers.filter_items_by_name(
+    #             self.filter_name,
+    #             self.bitflag_filter_item,
+    #             items,
+    #             "name",
+    #             reverse=False
+    #             )
+    #     else:
+    #         # Initialize with all items visible
+    #         filtered = [self.bitflag_filter_item] * len(items)
+    #
+    #     # Internal image filtering
+    #     for i, item in enumerate(items):
+    #         print(item.name)
+    #         if item.source not in {'VIEWER','GENERATED'} \
+    #         or not item.filepath:
+    #             # filtered[i] &= ~self.bitflag_filter_item
+    #             filtered[i] = self.bitflag_filter_item
+    #
+    #     # Invert the filter
+    #     if filtered:
+    #         show_flag = self.bitflag_filter_item & ~self.bitflag_filter_item
+    #
+    #         for i, bitflag in enumerate(filtered):
+    #             if bitflag == show_flag:
+    #                 filtered[i] = self.bitflag_filter_item
+    #             else:
+    #                 filtered[i] &= ~self.bitflag_filter_item
+    #
+    #     # for idx, item in enumerate(items) :
+    #     #     if item.source in {'VIEWER','GENERATED'} \
+    #     #     or not item.filepath:
+    #     #         flt_flags[idx] &= ~self.bitflag_filter_item
+    #
+    #     return filtered, ordered
+
 # External Images
 class IMGMNG_UL_external_images_uilist(bpy.types.UIList):
 
     def draw_item(self, context, layout, data, item, icon, active_data, active_propname, flt_flag) :
         row = layout.row(align = True)
 
+        if item.imported:
+            row.label(text="", icon="FILE_BLEND")
+        else:
+            row.label(text="", icon="IMPORT")
         row.label(text=item.name)
 
 
