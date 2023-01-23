@@ -15,7 +15,9 @@ class IMGMNG_OT_import_image(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return True
+        props = context.scene.imgmng_properties
+        if props.active_local_image_index in range(0,len(props.available_images)):
+            return True
 
     def execute(self, context):
         props=context.scene.imgmng_properties
