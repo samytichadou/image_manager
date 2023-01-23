@@ -45,6 +45,7 @@ from .operators import (
     pack_unpack_operator,
     copy_image_operator,
     import_external_image_operator,
+    image_actions_operator,
 )
 
 # register
@@ -61,6 +62,7 @@ def register():
     pack_unpack_operator.register()
     copy_image_operator.register()
     import_external_image_operator.register()
+    image_actions_operator.register()
 
 def unregister():
     addon_prefs.unregister()
@@ -73,3 +75,4 @@ def unregister():
     pack_unpack_operator.unregister()
     copy_image_operator.unregister()
     import_external_image_operator.unregister()
+    image_actions_operator.unregister()

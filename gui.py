@@ -4,11 +4,12 @@ import os
 from .operators.folder_actions_operator import return_image_folder
 
 from bpy.types import bpy_prop_collection   
+
 def search_image_uses(ID):
     def users(col):
         ret =  tuple(repr(o) for o in col if o.user_of_id(ID))
         return ret if ret else None
-    return filter(None, (
+    raw=filter(None, (
         users(getattr(bpy.data, p)) 
         for p in  dir(bpy.data) 
         if isinstance(
@@ -17,6 +18,13 @@ def search_image_uses(ID):
                 )                
         )
         )
+    uses_list=[]
+    for f in raw:
+        splits=str(f).split('"')
+        for s in splits:
+            if "bpy.data." in s:
+                uses_list.append(s.split("bpy.data.")[1])
+    return uses_list
 
 class IMGMNG_PT_image_panel(bpy.types.Panel):
     bl_label = "Image Manager"

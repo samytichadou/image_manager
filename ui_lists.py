@@ -27,7 +27,7 @@ class IMGMNG_UL_internal_images_uilist(bpy.types.UIList):
 
         # external files
         else:
-            # RESOURCESe FOLDER
+            # RESOURCES FOLDER
             folderpath=fld.return_image_folder()
             if os.path.dirname(bpy.path.abspath(item.filepath))==folderpath:
                 row.label(text="", icon="CHECKMARK")
@@ -47,6 +47,10 @@ class IMGMNG_UL_internal_images_uilist(bpy.types.UIList):
                 row.operator('imgmng.unpack_image', text="", icon="PACKAGE").image=item.name
             else:
                 row.operator('imgmng.pack_image', text="", icon="UGLYPACKAGE").image=item.name
+
+            # ADDITIONAL OPERATORS
+            row.operator('imgmng.reload_image', text="", icon="FILE_REFRESH").image=item.name
+            row.operator('imgmng.remove_image', text="", icon="X").image=item.name
 
     # def filter_items(self, context, data, propname):
     #     filtered = []
