@@ -37,6 +37,7 @@ class IMGMNG_OT_copy_image(bpy.types.Operator):
             return {'CANCELLED'}
 
         filepath=copy_relink_image_at_location(img, dst)
+        img.modification_time=str(os.path.getmtime(filepath))
         self.report({'INFO'}, f"Image Copied : {filepath}")
         rld.reload_available_images()
         return {'FINISHED'}

@@ -34,12 +34,20 @@ class IMGMNG_UL_internal_images_uilist(bpy.types.UIList):
             else:
                 row.operator('imgmng.copy_image', text="", icon="FOLDER_REDIRECT").image=item.name
 
-            row.label(text="", icon="DISK_DRIVE")
+            if os.path.isfile(bpy.path.abspath(item.filepath)):
+                row.label(text="", icon="DISK_DRIVE")
+            else:
+                row.label(text="", icon="ERROR")
 
             # COMMON
             row.prop(item, "name", text="", emboss=False)
             # row.label(text=str(return_image_users(item)))
             # row.prop(item, "users", text="", emboss=False)
+            if not item.is_autoreloaded:
+                icon="MOD_TIME"
+            else:
+                icon="TIME"
+            row.prop(item, "is_autoreloaded", text="", icon=icon)
             row.prop(item, "use_fake_user", text="")
 
             # PACK UNPACK
@@ -51,6 +59,7 @@ class IMGMNG_UL_internal_images_uilist(bpy.types.UIList):
             # ADDITIONAL OPERATORS
             row.operator('imgmng.reload_image', text="", icon="FILE_REFRESH").image=item.name
             row.operator('imgmng.remove_image', text="", icon="X").image=item.name
+            row.operator('imgmng.reveal_image', text="", icon="FILE_FOLDER").image=item.name
 
     # def filter_items(self, context, data, propname):
     #     filtered = []

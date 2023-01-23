@@ -39,7 +39,14 @@ def register():
     bpy.types.Scene.imgmng_properties = \
         bpy.props.PointerProperty(type = IMGMNG_PR_properties, name="Image Manager Properties")
 
+    bpy.types.Image.is_autoreloaded = \
+        bpy.props.BoolProperty(name="Image autoreloaded")
+    bpy.types.Image.modification_time = \
+        bpy.props.StringProperty(name="Image modification time")
+
 def unregister():
     bpy.utils.unregister_class(IMGMNG_PR_available_images)
     bpy.utils.unregister_class(IMGMNG_PR_properties)
+    
     del bpy.types.Scene.imgmng_properties
+    del bpy.types.Image.modification_time

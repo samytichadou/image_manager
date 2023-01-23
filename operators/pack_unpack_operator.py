@@ -22,6 +22,7 @@ def unpack_image_at_location(image, location):
     os.rmdir(os.path.dirname(src))
 
     image.filepath=dst
+    
     return dst
 
 class IMGMNG_OT_pack_image(bpy.types.Operator):
@@ -54,7 +55,9 @@ class IMGMNG_OT_unpack_image(bpy.types.Operator):
         return True
 
     def execute(self, context):
-        filepath=unpack_image_at_location(bpy.data.images[self.image], fld.return_image_folder())
+        img=bpy.data.images[self.image]
+        filepath=unpack_image_at_location(img, fld.return_image_folder())
+        img.modification_time=str(os.path.getmtime(filepath))
         self.report({'INFO'}, f"Image Unpacked : {filepath}")
         rld.reload_available_images()
         return {'FINISHED'}

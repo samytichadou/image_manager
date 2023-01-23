@@ -22,7 +22,7 @@ bl_info = {
     "name": "Image Manager",
     "description": "",
     "author": "Samy Tichadou (tonton)",
-    "version": (0, 1, 0),
+    "version": (0, 2, 0),
     "blender": (3, 0, 0),
     "location": "Scene Properties",
     "wiki_url": "https://github.com/samytichadou/image_manager/blob/master/README.md",
@@ -37,6 +37,8 @@ from . import (
     ui_lists,
     gui,
     properties,
+    timer,
+    startup_handler,
 )
 
 from .operators import (
@@ -56,6 +58,8 @@ def register():
     ui_lists.register()
     gui.register()
     properties.register()
+    timer.register()
+    startup_handler.register()
 
     folder_actions_operator.register()
     reload_available_images_operator.register()
@@ -69,6 +73,8 @@ def unregister():
     ui_lists.unregister()
     gui.unregister()
     properties.unregister()
+    timer.unregister()
+    startup_handler.unregister()
 
     folder_actions_operator.unregister()
     reload_available_images_operator.unregister()

@@ -12,9 +12,19 @@ class IMGMNG_PT_addon_prefs(bpy.types.AddonPreferences):
         default="resources",
         )
 
+    timer_frequency : bpy.props.FloatProperty(
+        name="Fréquence (s)", 
+        precision=2, 
+        min=0.01, 
+        max=3600.00, 
+        default=10.00, 
+        description="Fréquence de rafraichissement du timer",
+        )
+
     def draw(self, context):
         layout = self.layout
         layout.prop(self, "folder_name")
+        layout.prop(self, "timer_frequency", text="Timer")
 
         
 # get addon preferences

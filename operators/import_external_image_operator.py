@@ -24,7 +24,8 @@ class IMGMNG_OT_import_image(bpy.types.Operator):
             rld.reload_available_images()
             return {'CANCELLED'}
 
-        import_image(self.filepath)
+        img=import_image(self.filepath)
+        img.modification_time=str(os.path.getmtime(self.filepath))
         self.report({'INFO'}, f"Image imported : {self.filepath}")
         rld.reload_available_images()
         return {'FINISHED'}
