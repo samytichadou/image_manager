@@ -129,7 +129,6 @@ class IMGMNG_PT_available_images_sub(bpy.types.Panel):
                     "active_available_image_index",
                     rows=3
                     )
-            layout.operator('imgmng.import_image')
 
 
 ### REGISTER ---

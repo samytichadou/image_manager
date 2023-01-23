@@ -112,8 +112,9 @@ class IMGMNG_UL_external_images_uilist(bpy.types.UIList):
         if item.imported:
             row.label(text="", icon="FILE_BLEND")
         else:
-            row.label(text="", icon="IMPORT")
+            row.operator('imgmng.import_image', text="", icon="IMPORT").filepath=item.filepath
         row.label(text=item.name)
+
 
 
 ### REGISTER ---
