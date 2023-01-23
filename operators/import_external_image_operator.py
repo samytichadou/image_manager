@@ -4,8 +4,7 @@ import os
 from . import reload_available_images_operator as rld
 
 def import_image(filepath):
-    img=bpy.data.images.load(filepath)
-    return img
+    return bpy.data.images.load(filepath)
 
 class IMGMNG_OT_import_image(bpy.types.Operator):
     bl_idname = "imgmng.import_image"
