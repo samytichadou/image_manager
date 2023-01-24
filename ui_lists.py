@@ -13,7 +13,7 @@ def return_image_users(image):
 # Internal Images
 class IMGMNG_UL_internal_images_uilist(bpy.types.UIList):
 
-    show_internal : bpy.props.BoolProperty(name = "Show Internals", description = "Show internal images")
+    show_internal : bpy.props.BoolProperty(name = "Show internal images")
 
     def draw_item(self, context, layout, data, item, icon, active_data, active_propname, flt_flag) :
         row = layout.row(align = True)
@@ -22,7 +22,7 @@ class IMGMNG_UL_internal_images_uilist(bpy.types.UIList):
         if item.source in {'VIEWER','GENERATED'} \
         or not item.filepath:
             row.label(text="", icon="DOT")
-            row.label(text="", icon="GHOST_ENABLED")
+            row.label(text="", icon="BLENDER")
             row.label(text=item.name)
 
         # external files
@@ -76,7 +76,14 @@ class IMGMNG_UL_internal_images_uilist(bpy.types.UIList):
     def draw_filter(self, context, layout):
         """UI code for the filtering/sorting/search area."""
         layout.separator()
-        layout.prop(self, 'show_internal', text='', icon='GHOST_ENABLED')
+        row=layout.row(align=True)
+        row.prop(self, 'filter_name', text="")
+        row.prop(self, 'use_filter_invert', text="", icon="ARROW_LEFTRIGHT")
+        row.separator()
+        row.prop(self, 'use_filter_sort_alpha', text="")
+        row.prop(self, 'use_filter_sort_reverse', text="", icon="SORT_ASC")
+        row.separator()
+        row.prop(self, 'show_internal', text="", icon='BLENDER')
 
     def filter_items(self, context, data, propname):
         filtered = []
