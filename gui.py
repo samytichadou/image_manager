@@ -38,6 +38,11 @@ class IMGMNG_PT_image_panel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
+        row=layout.row(align=True)
+        row.operator('image.open')
+        row.separator()
+        row.operator('file.make_paths_relative', text="All Relative")
+        row.operator('file.make_paths_absolute', text="All Absolute")
 
 class IMGMNG_PT_local_images_sub(bpy.types.Panel):
     bl_label = "Local Images"

@@ -57,7 +57,8 @@ class IMGMNG_OT_reveal_image(bpy.types.Operator):
         return True
 
     def execute(self, context):
-        fld.open_in_explorer(bpy.data.images[self.image].filepath)
+        img=bpy.data.images[self.image]
+        fld.open_in_explorer(bpy.path.abspath(img.filepath))
         self.report({'INFO'}, f"Image Revealed : {self.image}")
         return {'FINISHED'}
 
