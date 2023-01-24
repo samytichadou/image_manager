@@ -41,8 +41,8 @@ class IMGMNG_PT_image_panel(bpy.types.Panel):
         row=layout.row(align=True)
         row.operator('image.open')
         row.separator()
-        row.operator('file.make_paths_relative', text="All Relative")
-        row.operator('file.make_paths_absolute', text="All Absolute")
+        row.operator('imgmng.change_all_images_path_type', text="All Relative").relative=True
+        row.operator('imgmng.change_all_images_path_type', text="All Absolute").relative=False
 
 class IMGMNG_PT_local_images_sub(bpy.types.Panel):
     bl_label = "Local Images"

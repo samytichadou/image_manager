@@ -83,6 +83,32 @@ class IMGMNG_OT_change_path_type(bpy.types.Operator):
         self.report({'INFO'}, f"Image Path Changed : {img.filepath}")
         return {'FINISHED'}
 
+class IMGMNG_OT_change_all_images_path_type(bpy.types.Operator):
+    bl_idname = "imgmng.change_all_images_path_type"
+    bl_label = "Change Images Path Type"
+    bl_description = "Toggle between relative and absolute path for all images"
+    bl_options = {'INTERNAL','UNDO'}
+
+    relative: bpy.props.BoolProperty()
+
+    @classmethod
+    def poll(cls, context):
+        return True
+
+    def execute(self, context):
+        for img in bpy.data.images:
+            if img.source not in {'VIEWER','GENERATED'} \
+            and img.filepath:
+                if not self.relative and img.filepath.startswith("//"):
+                    img.filepath=bpy.path.abspath(img.filepath)
+                elif self.relative and not img.filepath.startswith("//"):
+                    img.filepath=bpy.path.relpath(img.filepath)
+        if self.relative:
+            style="Relative"
+        else:
+            style="Absolute"
+        self.report({'INFO'}, f"Images Path Style Changed to : {style}")
+        return {'FINISHED'}
 
 
 ### REGISTER ---
@@ -92,9 +118,11 @@ def register():
     bpy.utils.register_class(IMGMNG_OT_remove_image)
     bpy.utils.register_class(IMGMNG_OT_reveal_image)
     bpy.utils.register_class(IMGMNG_OT_change_path_type)
+    bpy.utils.register_class(IMGMNG_OT_change_all_images_path_type)
 
 def unregister():
     bpy.utils.unregister_class(IMGMNG_OT_reload_image)
     bpy.utils.unregister_class(IMGMNG_OT_remove_image)
     bpy.utils.unregister_class(IMGMNG_OT_reveal_image)
     bpy.utils.unregister_class(IMGMNG_OT_change_path_type)
+    bpy.utils.unregister_class(IMGMNG_OT_change_all_images_path_type)
