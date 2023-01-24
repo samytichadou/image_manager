@@ -28,8 +28,8 @@ def reload_available_images():
     img_coll=bpy.context.scene.imgmng_properties.available_images
     folderpath=return_image_folder()
     if not os.path.isdir(folderpath):
-        print("Image Manager --- No valid image folder")
-        return
+        #print("Image Manager --- No valid image folder")
+        return False
     img_coll.clear()
     for f in os.listdir(folderpath):
         if os.path.splitext(f)[1] in img_extensions:
@@ -41,6 +41,7 @@ def reload_available_images():
                 if bpy.path.abspath(img.filepath)==new.filepath:
                     new.imported=True
                     break
+    return True
 
 
 class IMGMNG_OT_reload_available_images(bpy.types.Operator):
