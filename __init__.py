@@ -22,12 +22,13 @@ bl_info = {
     "name": "Image Manager",
     "description": "",
     "author": "Samy Tichadou (tonton)",
-    "version": (0, 2, 0),
+    "version": (1, 0, 0),
     "blender": (3, 0, 0),
     "location": "Scene Properties",
     "wiki_url": "https://github.com/samytichadou/image_manager/blob/master/README.md",
     "tracker_url": "https://github.com/samytichadou/image_manager/issues/new",
-    "category": "Import-Export" }
+    "category": "Import-Export"
+        }
 
 # IMPORT SPECIFICS
 ##################################
