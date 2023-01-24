@@ -92,6 +92,7 @@ class IMGMNG_PT_image_uses_sub(bpy.types.Panel):
             users-=1
         layout = self.layout
         layout.label(text=f"Usage ({users})")
+        #print(f"{img.name} - {users}")
 
     def draw(self, context):
         active = bpy.data.images[context.scene.imgmng_properties.active_local_image_index]

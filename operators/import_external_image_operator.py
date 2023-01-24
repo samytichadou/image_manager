@@ -10,7 +10,7 @@ class IMGMNG_OT_import_image(bpy.types.Operator):
     bl_idname = "imgmng.import_image"
     bl_label = "Import Image"
     bl_description = "Import Image in Blender"
-    bl_options = {'INTERNAL'}
+    bl_options = {'INTERNAL','UNDO'}
 
     filepath: bpy.props.StringProperty()
 

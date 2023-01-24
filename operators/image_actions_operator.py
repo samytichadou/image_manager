@@ -31,7 +31,7 @@ class IMGMNG_OT_reload_image(bpy.types.Operator):
 class IMGMNG_OT_remove_image(bpy.types.Operator):
     bl_idname = "imgmng.remove_image"
     bl_label = "Remove Image"
-    bl_options = {'INTERNAL'}
+    bl_options = {'INTERNAL','UNDO'}
 
     image: bpy.props.StringProperty()
 
@@ -62,6 +62,28 @@ class IMGMNG_OT_reveal_image(bpy.types.Operator):
         self.report({'INFO'}, f"Image Revealed : {self.image}")
         return {'FINISHED'}
 
+class IMGMNG_OT_change_path_type(bpy.types.Operator):
+    bl_idname = "imgmng.change_path_type"
+    bl_label = "Change Path Type"
+    bl_description = "Toggle between relative and absolute path"
+    bl_options = {'INTERNAL','UNDO'}
+
+    image: bpy.props.StringProperty()
+
+    @classmethod
+    def poll(cls, context):
+        return True
+
+    def execute(self, context):
+        img=bpy.data.images[self.image]
+        if img.filepath.startswith("//"):
+            img.filepath=bpy.path.abspath(img.filepath)
+        else:
+            img.filepath=bpy.path.relpath(img.filepath)
+        self.report({'INFO'}, f"Image Path Changed : {img.filepath}")
+        return {'FINISHED'}
+
+
 
 ### REGISTER ---
 
@@ -69,8 +91,10 @@ def register():
     bpy.utils.register_class(IMGMNG_OT_reload_image)
     bpy.utils.register_class(IMGMNG_OT_remove_image)
     bpy.utils.register_class(IMGMNG_OT_reveal_image)
+    bpy.utils.register_class(IMGMNG_OT_change_path_type)
 
 def unregister():
     bpy.utils.unregister_class(IMGMNG_OT_reload_image)
     bpy.utils.unregister_class(IMGMNG_OT_remove_image)
     bpy.utils.unregister_class(IMGMNG_OT_reveal_image)
+    bpy.utils.unregister_class(IMGMNG_OT_change_path_type)

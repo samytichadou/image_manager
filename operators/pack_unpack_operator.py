@@ -29,7 +29,7 @@ class IMGMNG_OT_pack_image(bpy.types.Operator):
     bl_idname = "imgmng.pack_image"
     bl_label = "Pack Image"
     bl_description = "Pack image."
-    bl_options = {'INTERNAL'}
+    bl_options = {'INTERNAL','UNDO'}
 
     image: bpy.props.StringProperty()
 
@@ -46,7 +46,7 @@ class IMGMNG_OT_unpack_image(bpy.types.Operator):
     bl_idname = "imgmng.unpack_image"
     bl_label = "Unpack Image"
     bl_description = "Unpack image in resources folder."
-    bl_options = {'INTERNAL'}
+    bl_options = {'INTERNAL','UNDO'}
 
     image: bpy.props.StringProperty()
 

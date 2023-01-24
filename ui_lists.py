@@ -43,23 +43,35 @@ class IMGMNG_UL_internal_images_uilist(bpy.types.UIList):
             row.prop(item, "name", text="", emboss=False)
             # row.label(text=str(return_image_users(item)))
             # row.prop(item, "users", text="", emboss=False)
-            if not item.is_autoreloaded:
-                icon="MOD_TIME"
-            else:
-                icon="TIME"
-            row.prop(item, "is_autoreloaded", text="", icon=icon)
-            row.prop(item, "use_fake_user", text="")
 
+            # FAKE USER
+            row.prop(item, "use_fake_user", text="")
             # PACK UNPACK
             if item.packed_file:
                 row.operator('imgmng.unpack_image', text="", icon="PACKAGE").image=item.name
             else:
                 row.operator('imgmng.pack_image', text="", icon="UGLYPACKAGE").image=item.name
 
+            row.separator()
+
+            if not item.is_autoreloaded:
+                icon="MOD_TIME"
+            else:
+                icon="TIME"
+            row.prop(item, "is_autoreloaded", text="", icon=icon)
+
+            if item.filepath.startswith("//"):
+                icon="EVENT_R"
+            else:
+                icon="EVENT_A"
+            row.operator('imgmng.change_path_type', text="", icon=icon).image=item.name
+
+            #row.separator()
+
             # ADDITIONAL OPERATORS
             row.operator('imgmng.reload_image', text="", icon="FILE_REFRESH").image=item.name
-            row.operator('imgmng.remove_image', text="", icon="X").image=item.name
             row.operator('imgmng.reveal_image', text="", icon="FILE_FOLDER").image=item.name
+            row.operator('imgmng.remove_image', text="", icon="X").image=item.name
 
     # def filter_items(self, context, data, propname):
     #     filtered = []

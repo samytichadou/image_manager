@@ -20,7 +20,7 @@ class IMGMNG_OT_copy_image(bpy.types.Operator):
     bl_idname = "imgmng.copy_image"
     bl_label = "Copy Image"
     bl_description = "Copy image in resources folder."
-    bl_options = {'INTERNAL'}
+    bl_options = {'INTERNAL','UNDO'}
 
     image: bpy.props.StringProperty()
 
