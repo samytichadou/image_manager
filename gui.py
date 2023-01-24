@@ -83,15 +83,19 @@ class IMGMNG_PT_image_uses_sub(bpy.types.Panel):
 
     @classmethod
     def poll(cls, context):
-        return context.scene.imgmng_properties.active_local_image_index in range(0,len(bpy.data.images))
+        props=context.scene.imgmng_properties
+        if props.active_local_image_index in range(0,len(bpy.data.images)):
+            img=bpy.data.images[props.active_local_image_index]
+            if img.source not in {'VIEWER','GENERATED'} \
+            and img.filepath:
+                return True
 
     def draw_header(self, context):
         img=bpy.data.images[context.scene.imgmng_properties.active_local_image_index]
-        users=img.users
-        if img.use_fake_user:
-            users-=1
+        uses=search_image_uses(img)
+
         layout = self.layout
-        layout.label(text=f"Usage ({users})")
+        layout.label(text=f"Usage ({len(uses)})")
         #print(f"{img.name} - {users}")
 
     def draw(self, context):
@@ -125,16 +129,16 @@ class IMGMNG_PT_available_images_sub(bpy.types.Panel):
             row.operator('imgmng.reload_available_images', text="", icon="FILE_REFRESH")
             row.operator('imgmng.open_filepath', text="", icon="FILE_FOLDER").filepath=folderpath
 
-            if props.active_available_image_index in range(0,len(props.available_images)):
-                layout.template_list(
-                    "IMGMNG_UL_external_images_uilist",
-                    "",
-                    props,
-                    "available_images",
-                    props,
-                    "active_available_image_index",
-                    rows=3
-                    )
+            layout.template_list(
+                "IMGMNG_UL_external_images_uilist",
+                "",
+                props,
+                "available_images",
+                props,
+                "active_available_image_index",
+                rows=3
+                )
+            #if props.active_available_image_index in range(0,len(props.available_images)):
 
 
 ### REGISTER ---
