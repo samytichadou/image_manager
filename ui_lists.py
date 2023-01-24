@@ -76,7 +76,7 @@ class IMGMNG_UL_internal_images_uilist(bpy.types.UIList):
     def draw_filter(self, context, layout):
         """UI code for the filtering/sorting/search area."""
         layout.separator()
-        layout.prop(self, 'show_internal', text='', icon='VIEWZOOM')
+        layout.prop(self, 'show_internal', text='', icon='GHOST_ENABLED')
 
     def filter_items(self, context, data, propname):
         filtered = []
