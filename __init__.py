@@ -22,7 +22,7 @@ bl_info = {
     "name": "Image Manager",
     "description": "",
     "author": "Samy Tichadou (tonton)",
-    "version": (1, 1, 0),
+    "version": (1, 2, 0),
     "blender": (3, 0, 0),
     "location": "Scene Properties",
     "wiki_url": "https://github.com/samytichadou/image_manager/blob/master/README.md",
