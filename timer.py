@@ -15,17 +15,38 @@ def reload_image_modification_time(image):
         return True
     return False
 
+def update_3d_viewers(context):
+    if context.scene.render.engine not in ['BLENDER_EEVEE','BLENDER_WORKBENCH']:
+        wm = bpy.data.window_managers['WinMan']
+        for window in wm.windows :
+            for area in window.screen.areas :
+                if area.type=='VIEW_3D' :
+                    for space in area.spaces :
+                        if space.type == 'VIEW_3D' and space.shading.type == 'RENDERED' :
+                            space.shading.type = 'SOLID'
+                            space.shading.type = 'RENDERED'
+
 def timer_image_watcher():
     #print("IMGMNG --- Timer")
     interval = get_addon_preferences().timer_frequency
-    # reload folder
+
+    # Reload folder
     rld.reload_available_images()
-    # reload images if needed
+
+    # Reload images if needed
+    chk_changes = False
     for i in bpy.data.images:
         if i.is_autoreloaded:
             if reload_image_modification_time(i):
                 i.reload()
+                chk_changes = True
                 print(f"IMGMNG --- {i.name} reloaded")
+
+    # Reload UI
+    if chk_changes:
+        print("IMGMNG --- Updating 3d views")
+        update_3d_viewers(bpy.context)
+
     return interval
 
 
