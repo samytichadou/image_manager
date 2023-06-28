@@ -6,7 +6,7 @@ from .timer import reload_image_modification_time
 @persistent
 def reload_images_handler(scene):
     print("IMGMNG --- Reloading images modification time")
-    for img in bpy.data.libraries:
+    for img in bpy.data.images:
         reload_image_modification_time(img)
 
 
