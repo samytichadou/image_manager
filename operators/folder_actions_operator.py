@@ -65,7 +65,7 @@ class IMGMNG_OT_open_filepath(bpy.types.Operator):
         not os.path.isfile(self.filepath):
             self.report({'WARNING'}, "Folder/File does not exist")
             return {'FINISHED'}
-        open_in_explorer(self.filepath)
+        open_in_explorer(f"{self.filepath}/")
         self.report({'INFO'}, f"Folder opened : {self.filepath}")
         return {'FINISHED'}
 
